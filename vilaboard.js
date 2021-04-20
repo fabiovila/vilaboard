@@ -7,6 +7,9 @@
       isFullScreen: false,
       selectedColor: "#000000",
       selectedStroke: "2px",
+      undo: [],
+      redo: [],
+      teachingmode: true,
     });
 
     var parent = $('teach');
@@ -18,10 +21,14 @@
         }
     );
     document.addEventListener('keydown',function(event) {
-        var active = canvas.getActiveObject();
+        const active = canvas.getActiveObject();
         const key = event.key;
-        if (key==="Delete"){
-            canvas.remove(active);
+        if (key==="Delete"){ canvas.remove(active); }
+        if (event.ctrlKey && key === 'z'){
+            const pop = canvas.undo.pop();
+            if (typeof pop !== 'undefined') {
+                pop.undo();
+            } 
         }
     });
 
@@ -55,17 +62,18 @@
     clearEl.onclick = function() { canvas.clear() };
 
     toolbarAddtext.onmouseup = function() {
-        canvas.add(
-            new fabric.Textbox(
-                $('addtext').value,{
-                    fill: canvas.selectedColor,
-                }
-            )
-        );
+        canvas.isDrawingMode = false;
+        var text = new fabric.Textbox(
+            $('addtext').value,{
+                fill: canvas.selectedColor
+            }
+        )
+        if (canvas.teachingmode) text.setControlsVisibility({ bl: false, tl: false, tr: false, ml: false, mb: false, mt: false, mtr: false })
+        canvas.add(text);
     }
   
     $('select').onclick = function() { canvas.isDrawingMode = false; };
-    $('draw').onclick = function() { canvas.isDrawingMode = true; };
+    $('draw').onclick = function()   { canvas.isDrawingMode = true; };
     
     $('white').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
     $('black').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
@@ -79,7 +87,31 @@
     $('stroke3').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1 }
     $('stroke4').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1 }
 
-  
+    canvas.on (
+        'object:modified', () => {
+            canvas.undo.push({'undo': ()=> canvas.remove(e.target), 'redo': ()=> canvas.add(e.target)});
+        }
+    )
+    canvas.on (
+        'object:added', (e) => {
+            canvas.undo.push({
+            'undo': ()=> {
+                e.target.vilaundo = true;
+                canvas.remove(e.target)
+            }, 
+            'redo': ()=> {
+                canvas.add(e.target)
+            },
+            }
+        );
+        }
+    )
+    canvas.on (
+        'object:removed', (e) => {
+            canvas.undo.push({'undo': ()=>canvas.add(e.target), 'redo': ()=>canvas.remove(e.target)});
+        }
+        
+    )
 
 
     canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
@@ -93,8 +125,8 @@
         brush.width = 2;
         brush.shadow = new fabric.Shadow({
           blur: 5,
-          offsetX: 4,
-          offsetY: 4,
+          offsetX: 3,
+          offsetY: 3,
           affectStroke: true,
           color: "#00000022",
         });
