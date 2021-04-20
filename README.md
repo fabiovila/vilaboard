@@ -5,8 +5,8 @@ https://fabiovila.github.io/vilaboard/
 
 
 ## Shortcuts:
-Del     - delete object
-CTRL+Z  - Undo (1 step currently)
+- Del     - delete object
+- CTRL+Z  - Undo (1 step currently)
 
 ## ToDo:
 - 'Infinite' undo
