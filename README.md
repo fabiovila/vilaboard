@@ -1,7 +1,7 @@
 # Vilaboard
 https://fabiovila.github.io/vilaboard/
 
-![Screenshot](https://github.com/fabiovila/vilaboard/blob/gh-pages/imgs/screenshot.png)
+![Screenshot](https://github.com/fabiovila/vilaboard/blob/main/imgs/screenshot.png)
 
 
 ## Shortcuts:
