@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>VilaBoard</title>
+     <script src="fabric.js"></script>
+  </head>
+  <body>
+<style>
+
+#teach {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ccc;
+}
+#toolbar {
+  line-height: 24px;
+  border-bottom: 1px solid #ccc;
+  min-height: 24px;
+  padding: 5px;
+  opacity: 0.2;
+  display: flex;
+}
+
+#toolbar:hover {
+  opacity: 1.0;
+}
+
+.btng {
+font-weight: bolder;
+font-size: large;
+padding: 2px;
+display: inline-flex;
+}
+
+.btng input {
+  width: 10rem;
+  border-style: none;
+  border: 1px solid #eee;
+  height: 2rem;
+  padding: 0 5px 0 5px;
+}
+.btng input:active {
+  border-radius: 5px;
+  border: 1px solid rgb(143, 206, 235);
+}
+.btng input:focus {
+  border-radius: 5px;
+  border: 1px solid rgb(143, 206, 235);
+}
+
+.btng button {
+  display:inline-flexbox;
+  border-style: none;
+  margin: 2px;
+  border-radius: 100px;
+  width: 28px;
+  height: 28px;
+  box-shadow: 2px 2px 2px #ccc;
+}
+.btng button:hover {   transform: scale(1.1); }
+.btng button:active {  transform: scale(0.8); }
+
+.color {
+  border-style: none;
+
+}
+.btng #color1 {  background-color:#2EFFCB ; }
+.btng #color2 {  background-color:#FF2E62 ; }
+.btng #color3 {  background-color:#FFCB2E ; }
+.btng #color4 {  background-color:#2E62FF ; }
+.btng #white  {  background-color:#FFFFFF ; }
+.btng #black  {  background-color:black   ; }
+
+</style>
+
+<div id="teach">
+  <div id="toolbar">
+    <span class="btng">    
+      <input id="addtext" type="text"/>
+      <button id="addtextbt" class="btn"><strong>+</strong></button>
+    </span>
+    <span class="btng"> 
+      <button id="select">
+        <svg width="2.6458mm" height="4.2333mm" version="1.1" viewBox="0 0 2.6458325 4.2333331">
+        <g transform="translate(-1.9573 -1.7103)">
+        <g transform="matrix(.010602 0 0 .011747 1.3698 1.7103)">
+        <path d="m301.12 173.31-182.13-170.04c-3.242-3.038-7.891-4.049-12.105-2.639-4.211 1.404-7.317 5.006-8.086 9.389l-43.202 245.39c-0.854 4.847 1.306 9.717 5.464 12.341 4.152 2.625 9.49 2.465 13.491-0.378l59.968-42.699 47.219 127.45c2.127 6.336 8.984 9.765 15.332 7.648l62.087-20.771c6.342-2.116 9.771-8.984 7.648-15.327l-47.228-127.43 73.596-1.975c4.905-0.13 9.262-3.215 11.006-7.802 1.744-4.609 0.532-9.805-3.062-13.153zm-98.532-0.851c-3.842 0.109-7.4 2.004-9.599 5.163-2.205 3.147-2.778 7.146-1.561 10.781l48.557 131.47-39.111 13.075-48.56-131.46c-1.224-3.647-4.093-6.502-7.743-7.679-3.656-1.188-7.643-0.585-10.772 1.649l-49.216 35.027 34.206-194.28 144.19 134.64z"/>
+        </g>
+        </g>
+        </svg>
+      </button>
+      <button id='draw'>
+        <svg version="1.1" viewBox="0 0 10 16" >
+        <g transform="matrix(.011538 0 0 .018363 -.35216 -1.8781)" stroke-dashoffset="33.335" stroke-linejoin="bevel">
+        <path transform="matrix(.70598 -.70823 .70598 .70823 0 0)" d="m-241.36 575.5 563.36-19.83c102.11-3.594 172.41 49.002 172.41 151.18 0 102.18-74.494 146.53-176.67 144.87l-547.27-8.9313c-102.17-1.6674-189.87-33.753-189.87-135.93 0-102.18 75.93-127.76 178.04-131.35z" stop-color="#000000" stroke-width="20.474" style="paint-order:markers stroke fill"/>
+        <path d="m139.57 728.3c35.877 91.535 59.954 110.45 145.61 130.41-53.353 53.353-185.34 153-238.69 99.652-53.353-53.353 39.728-176.71 93.08-230.06z" stop-color="#000000" stroke-width="15.118" style="paint-order:markers stroke fill"/>
+        <rect transform="matrix(1 0 -.94327 .33204 0 0)" x="2803.6" y="2810.6" width="778.27" height="118" ry="59.001" stop-color="#000000" stroke-width="26.236" style="paint-order:markers stroke fill"/>
+        </g>
+        </svg>
+        </button>
+      <button id="clear-canvas">
+        <svg width="2.6458mm" height="4.2333mm" version="1.1" viewBox="0 0 2.6458325 4.2333331">
+        <g transform="translate(-1.9573 -1.7103)">
+        <g transform="matrix(1 0 0 .78337 .037895 .78558)" stroke-dashoffset="33.335" stroke-linejoin="bevel" stroke-width="2.4966">
+        <rect transform="rotate(-30)" x=".49094" y="3.1173" width=".82885" height="3.8402" ry=".41442" stop-color="#000000" style="paint-order:markers stroke fill"/>
+        <rect transform="rotate(30)" x="4.3317" y="-.18596" width=".82885" height="3.8402" ry=".41442" stop-color="#000000" style="paint-order:markers stroke fill"/>
+        </g>
+        </g>
+        </svg>
+        
+        </button>
+    </span>
+    <span class="btng">
+      <button id="white" class="color" value="#FFFFFF"></button>
+      <button id="black" class="color" value="#000000"></button>
+      <button id="color1" class="color" value="#2EFFCB"></button>
+      <button id="color2" class="color" value="#FF2E62"></button>
+      <button id="color3" class="color" value="#FFCB2E"></button>
+      <button id="color4" class="color" value="#2E62FF"></button>
+    </span>
+    <span class="btng">
+      <button id="stroke1" class="stroke" value="1"><svg height="20px" width="20px"><circle cx="7" cy="12" r="2px" fill="#000000" /></svg></button>
+      <button id="stroke2" class="stroke" value="2"><svg height="20px" width="20px"><circle cx="7" cy="12" r="3px" fill="#000000" /></svg></button>
+      <button id="stroke3" class="stroke" value="5"><svg height="20px" width="20px"><circle cx="7" cy="12" r="5px" fill="#000000" /></svg></button>
+      <button id="stroke4" class="stroke" value="10"><svg height="28px" width="28px"><circle cx="7" cy="13" r="7px" fill="#000000" /></svg></button>
+    </span>
+  </div>
+  <canvas id="c" ></canvas>
+</div>
+
+<script src="vilaboard.js"></script>
+  </body>
+</html>
