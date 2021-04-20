@@ -10,6 +10,7 @@
       undo: [],
       redo: [],
       teachingmode: true,
+      backgroundImage: null,
     });
 
     var parent = $('teach');
@@ -17,7 +18,7 @@
     canvas.setDimensions(
         {
             width: window.innerWidth,
-            height: window.innerHeight - 100,
+            height: window.innerHeight - 75,
         }
     );
     document.addEventListener('keydown',function(event) {
@@ -56,10 +57,7 @@
   
     var drawingModeEl = $('drawing-mode'),
         drawingShadowWidth = $('drawing-shadow-width'),
-        toolbarAddtext = $('addtextbt'),
-        clearEl = $('clear-canvas');
-  
-    clearEl.onclick = function() { canvas.clear() };
+        toolbarAddtext = $('addtextbt');
 
     toolbarAddtext.onmouseup = function() {
         canvas.isDrawingMode = false;
@@ -74,18 +72,35 @@
   
     $('select').onclick = function() { canvas.isDrawingMode = false; };
     $('draw').onclick = function()   { canvas.isDrawingMode = true; };
-    
-    $('white').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
-    $('black').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
-    $('color1').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
-    $('color2').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
-    $('color3').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
-    $('color4').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.value; }
+    $('new').onclick = ()=> {canvas.clear()};
+    $('del').onclick = ()=> {
+        const obj = canvas.getActiveObject();
+        canvas.remove(obj);
+    };
+    $('white').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value');}
+    $('black').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
+    $('color1').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
+    $('color2').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
+    $('color3').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
+    $('color4').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
 
-    $('stroke1').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1 }
-    $('stroke2').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1 }
-    $('stroke3').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1 }
-    $('stroke4').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.value, 10) || 1 }
+    $('stroke1').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.getAttribute('value'), 10) || 1 }
+    $('stroke2').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.getAttribute('value'), 10) || 1 }
+    $('stroke3').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.getAttribute('value'), 10) || 1 }
+    $('stroke4').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.getAttribute('value'), 10) || 1 }
+
+    $('t1').onclick = (e)=> {
+        const src = e.target.src;
+        document.body.style.backgroundImage = `url('${src}')`; 
+    }
+    $('t2').onclick = (e)=> {
+        const src = e.target.src;
+        document.body.style.backgroundImage = `url('${src}')`; 
+    }
+    $('t3').onclick = (e)=> {
+        const src = e.target.src;
+        document.body.style.backgroundImage = `url('${src}')`; 
+    }
 
     canvas.on (
         'object:modified', () => {

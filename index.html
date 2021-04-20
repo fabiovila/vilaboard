@@ -25,6 +25,7 @@
     <meta property="twitter:description" content="Draw, write, move, scale your ideias on VilaBoard.
     Perfect to teaching, YouTube and presentations">
     <meta property="twitter:image" content="https://fabiovila.github.io/vilaboard/imgs/screenshot.png">
+<<<<<<< HEAD
 			<script async src="https://www.googletagmanager.com/gtag/js?id=G-YVXGQ0BW2Z"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
@@ -34,22 +35,37 @@
 	  gtag('config', 'G-YVXGQ0BW2Z');
 	</script>
   <script src="fabric.js"></script>
+=======
+    <title>VilaBoard</title>
+     <script src="fabric.js"></script>
+>>>>>>> main
   </head>
   <body>
 <style>
 
+body {
+  font-family: Helvetica, Arial, "Droid Sans",Sans-Serif;
+  background-size: cover;
+  overflow: hidden;
+}
+.r {
+  float: right;
+}
+
 #teach {
   width: 100%;
   height: 100%;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc33;
 }
 #toolbar {
   line-height: 24px;
-  border-bottom: 1px solid #ccc;
+  border: 1px solid #cccccc33;
   min-height: 24px;
   padding: 5px;
  /* opacity: 0.2;*/
   display: flex;
+  opacity : 0.2; 
+  transition:opacity 1s; 
 }
 
 #toolbar:hover {
@@ -69,6 +85,7 @@ display: inline-flex;
   border: 1px solid #eee;
   height: 2rem;
   padding: 0 5px 0 5px;
+  border-radius: 15px;
 }
 .btng input:active {
   border-radius: 5px;
@@ -79,39 +96,101 @@ display: inline-flex;
   border: 1px solid rgb(143, 206, 235);
 }
 
-.btng button {
-  display:inline-flexbox;
-  border-style: none;
+.btng a {
+  display: flex;
   margin: 2px;
   border-radius: 100px;
   width: 28px;
   height: 28px;
-  box-shadow: 2px 2px 2px #ccc;
+  background-color: #eee;
+  box-shadow: 2px 2px 2px #cccccc55;
+  text-align: center;
 }
-.btng button:hover {   transform: scale(1.1); }
-.btng button:active {  transform: scale(0.8); }
+.btng a:hover {   transform: scale(1.1); }
+.btng a:active {  transform: scale(0.8); }
+.btng svg {
+  width: 100%;
+  height: 50%;
+  margin: auto;
+}
 
 .color {
   border-style: none;
 
 }
-.btng #color1 {  background-color:#2EFFCB ; }
+.btng #color1 {  background-color:#c0ff2e ; }
 .btng #color2 {  background-color:#FF2E62 ; }
 .btng #color3 {  background-color:#FFCB2E ; }
 .btng #color4 {  background-color:#2E62FF ; }
 .btng #white  {  background-color:#FFFFFF ; }
 .btng #black  {  background-color:black   ; }
 
+
+.dropbtn {
+  background-color: #eee;
+  padding: 6px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  border-radius: 15px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+#m1 img {
+  max-width: 100px;
+}
+
 </style>
 
 <div id="teach">
   <div id="toolbar">
+    <span class="btng"> 
+      <a href="#" id="new">
+        <svg width="2.6458mm" height="4.2333mm" version="1.1" viewBox="0 0 2.6458325 4.2333331" >
+        <g transform="translate(-1.9573 -1.7103)">
+        <rect x="2.3216" y="2.3296" width="1.9041" height="2.9668" rx=".35845" ry=".46318" fill="#ffffff" stop-color="#000000" stroke="#000" stroke-dashoffset="33.335" stroke-linejoin="bevel" stroke-width=".29792" style="paint-order:markers stroke fill"/>
+        </g>
+        </svg>        
+      </a>
+    </span>
     <span class="btng">    
       <input id="addtext" type="text"/>
-      <button id="addtextbt" class="btn"><strong>+</strong></button>
+      <a id="addtextbt" class="btn">
+        <svg width="2.6458mm" height="4.2333mm" version="1.1" viewBox="0 0 2.6458325 4.2333331">
+        <g transform="translate(-1.9573 -1.7103)">
+        <rect transform="rotate(90)" x="3.5276" y="-4.4034" width=".54252" height="2.2597" rx=".18621" ry=".26451" stop-color="#000000" style="paint-order:markers stroke fill"/>
+        <rect transform="scale(-1)" x="-3.5554" y="-4.9448" width=".54252" height="2.2597" rx=".18621" ry=".26451" stop-color="#000000" style="paint-order:markers stroke fill"/>
+        </g>
+        </svg>
+      </a>
     </span>
     <span class="btng"> 
-      <button id="select">
+      <a href="#" id="select">
         <svg width="2.6458mm" height="4.2333mm" version="1.1" viewBox="0 0 2.6458325 4.2333331">
         <g transform="translate(-1.9573 -1.7103)">
         <g transform="matrix(.010602 0 0 .011747 1.3698 1.7103)">
@@ -119,8 +198,8 @@ display: inline-flex;
         </g>
         </g>
         </svg>
-      </button>
-      <button id='draw'>
+      </a>
+      <a href="#" id='draw'>
         <svg version="1.1" viewBox="0 0 10 16" >
         <g transform="matrix(.011538 0 0 .018363 -.35216 -1.8781)" stroke-dashoffset="33.335" stroke-linejoin="bevel">
         <path transform="matrix(.70598 -.70823 .70598 .70823 0 0)" d="m-241.36 575.5 563.36-19.83c102.11-3.594 172.41 49.002 172.41 151.18 0 102.18-74.494 146.53-176.67 144.87l-547.27-8.9313c-102.17-1.6674-189.87-33.753-189.87-135.93 0-102.18 75.93-127.76 178.04-131.35z" stop-color="#000000" stroke-width="20.474" style="paint-order:markers stroke fill"/>
@@ -128,8 +207,8 @@ display: inline-flex;
         <rect transform="matrix(1 0 -.94327 .33204 0 0)" x="2803.6" y="2810.6" width="778.27" height="118" ry="59.001" stop-color="#000000" stroke-width="26.236" style="paint-order:markers stroke fill"/>
         </g>
         </svg>
-        </button>
-      <button id="clear-canvas">
+      </a>
+      <a href="#" id="del">
         <svg width="2.6458mm" height="4.2333mm" version="1.1" viewBox="0 0 2.6458325 4.2333331">
         <g transform="translate(-1.9573 -1.7103)">
         <g transform="matrix(1 0 0 .78337 .037895 .78558)" stroke-dashoffset="33.335" stroke-linejoin="bevel" stroke-width="2.4966">
@@ -138,26 +217,41 @@ display: inline-flex;
         </g>
         </g>
         </svg>        
-      </button>
+      </a>
     </span>
     <span class="btng">
-      <button id="white" class="color" value="#FFFFFF"></button>
-      <button id="black" class="color" value="#000000"></button>
-      <button id="color1" class="color" value="#2EFFCB"></button>
-      <button id="color2" class="color" value="#FF2E62"></button>
-      <button id="color3" class="color" value="#FFCB2E"></button>
-      <button id="color4" class="color" value="#2E62FF"></button>
+      <a href="#" id="white" class="color" value="#FFFFFF"></a>
+      <a href="#" id="black" class="color" value="#000000"></a>
+      <a href="#" id="color1" class="color" value="#c0ff2e"></a>
+      <a href="#" id="color2" class="color" value="#FF2E62"></a>
+      <a href="#" id="color3" class="color" value="#FFCB2E"></a>
+      <a href="#" id="color4" class="color" value="#2E62FF"></a>
     </span>
     <span class="btng">
-      <button id="stroke1" class="stroke" value="1"><svg height="20px" width="20px"><circle cx="7" cy="12" r="2px" fill="#000000" /></svg></button>
-      <button id="stroke2" class="stroke" value="2"><svg height="20px" width="20px"><circle cx="7" cy="12" r="3px" fill="#000000" /></svg></button>
-      <button id="stroke3" class="stroke" value="5"><svg height="20px" width="20px"><circle cx="7" cy="12" r="5px" fill="#000000" /></svg></button>
-      <button id="stroke4" class="stroke" value="10"><svg height="28px" width="28px"><circle cx="7" cy="13" r="7px" fill="#000000" /></svg></button>
+      <a href="#" id="stroke1" class="stroke" value="1"><svg height="20px" width="20px"><circle cx="14" cy="7" r="2px" fill="#000000" /></svg></a>
+      <a href="#" id="stroke2" class="stroke" value="2"><svg height="20px" width="20px"><circle cx="14" cy="7" r="3px" fill="#000000" /></svg></a>
+      <a href="#" id="stroke3" class="stroke" value="5"><svg height="20px" width="20px"><circle cx="14" cy="7" r="5px" fill="#000000" /></svg></a>
+      <a href="#" id="stroke4" class="stroke" value="10"><svg height="28px" width="28px"><circle cx="14" cy="7" r="7px" fill="#000000" /></svg></a>
+    </span>
+    <span class="">
+      <div class="dropdown">
+        <a onclick="mo('m1')" class="dropbtn"><strong>Theme</strong></a>
+        <div id="m1" class="dropdown-content">
+          <a  href="#"><img id="t1" src="imgs/black-1072366_1920.jpg"></a>
+          <a  href="#"><img id="t2" src="imgs/flowers-3956074_1920.jpg"></a>
+          <a  href="#"><img id="t3" src="imgs/rect1867.png"></a>
+        </div>
+      </div> 
     </span>
   </div>
   <canvas id="c" ></canvas>
 </div>
-
+<script>
+function mo(id) {
+    var modal = document.getElementById(id);
+    modal.style.display = "block";
+  }
+</script>
 <script src="vilaboard.js"></script>
   </body>
 </html>
