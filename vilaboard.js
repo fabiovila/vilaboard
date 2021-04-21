@@ -82,7 +82,7 @@
     };
 
     function setColor(color) {
-        canvas.selectedColor = this.getAttribute('value');
+        canvas.selectedColor = color;
         canvas.freeDrawingBrush.color = canvas.selectedColor;
         const obj = canvas.getActiveObject();
         if ( typeof obj !== 'undefined' && obj !== null) {
