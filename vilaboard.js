@@ -41,17 +41,7 @@
                 width: window.innerWidth,
                 height: window.innerHeight - 100,
             }
-        );
-        
-       /*
-        canvas.setDimensions(
-            {
-                width: parent.offsetWidth,
-                height: parent.offsetHeight
-            }
-        );
-        */
-        
+        );      
     })
 
     fabric.Object.prototype.transparentCorners = false;
