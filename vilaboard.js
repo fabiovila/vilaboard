@@ -2,6 +2,7 @@
 (function() {
     
     var $ = function(id){return document.getElementById(id)};
+
     var canvas = this.__canvas = new fabric.Canvas('c', {
       isDrawingMode: true,
       isFullScreen: false,
@@ -63,7 +64,9 @@
         canvas.isDrawingMode = false;
         var text = new fabric.Textbox(
             $('addtext').value,{
-                fill: canvas.selectedColor
+                fill: canvas.selectedColor,
+                fontFamily: 'sans-serif',
+                statefullCache: true,
             }
         )
         if (canvas.teachingmode) text.setControlsVisibility({ bl: false, tl: false, tr: false, ml: false, mb: false, mt: false, mtr: false })
@@ -77,12 +80,28 @@
         const obj = canvas.getActiveObject();
         canvas.remove(obj);
     };
-    $('white').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value');}
-    $('black').onclick  = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
-    $('color1').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
-    $('color2').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
-    $('color3').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
-    $('color4').onclick = function()  { canvas.freeDrawingBrush.color = canvas.selectedColor = this.getAttribute('value'); }
+
+    function setColor(color) {
+        canvas.selectedColor = this.getAttribute('value');
+        canvas.freeDrawingBrush.color = canvas.selectedColor;
+        const obj = canvas.getActiveObject();
+        if ( typeof obj !== 'undefined' && obj !== null) {
+            if (obj instanceof fabric.Textbox) {
+                obj.set('fill',color);            
+            } else {
+                obj.set('stroke',color);
+            } 
+            canvas.renderAll();
+        }
+    }
+    
+    $('white').onclick  = function()  {  setColor(this.getAttribute('value'))}
+    $('black').onclick  = function()  {  setColor(this.getAttribute('value'))}
+    $('color1').onclick = function()  {  setColor(this.getAttribute('value'))}
+    $('color2').onclick = function()  {  setColor(this.getAttribute('value'))}
+    $('color3').onclick = function()  {  setColor(this.getAttribute('value'))}
+    $('color4').onclick = function()  {  setColor(this.getAttribute('value'))}
+    
 
     $('stroke1').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.getAttribute('value'), 10) || 1 }
     $('stroke2').onclick = function() { canvas.freeDrawingBrush.width = parseInt(this.getAttribute('value'), 10) || 1 }
@@ -129,11 +148,14 @@
     )
 
 
-    canvas.freeDrawingBrush = new fabric.PencilBrush(canvas);
+    canvas.freeDrawingBrush = new fabric.PencilBrush(canvas,{
+        statefullCache: true,
+    });
  
     if (canvas.freeDrawingBrush) {
         var brush = canvas.freeDrawingBrush;
         brush.color = "#000000";
+        
         if (brush.getPatternSrc) {
           brush.source = brush.getPatternSrc.call(brush);
         }
