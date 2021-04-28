@@ -1,5 +1,6 @@
 # Vilaboard
-https://fabiovila.github.io/vilaboard/
+## Improved Version
+https://www.vilaboard.com
 
 ![Screenshot](https://github.com/fabiovila/vilaboard/blob/gh-pages/imgs/screenshot.png)
 
